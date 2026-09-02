@@ -1,0 +1,318 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+::selection {
+    background: #dc143c;
+    color: #ffffff;
+}
+
+body {
+    background-color: #020204;
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 15px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Эффект кинозерна */
+.grain-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Неоновое свечение фона */
+.bg-glow {
+    position: fixed;
+    top: -50px; left: -50px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(220, 20, 60, 0.28) 0%, rgba(80, 0, 20, 0.12) 50%, transparent 70%);
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+    animation: floatGlow 12s ease-in-out infinite alternate;
+}
+
+.bg-glow-2 {
+    position: fixed;
+    bottom: -50px; right: -50px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139, 0, 0, 0.25) 0%, rgba(20, 5, 15, 0.1) 60%, transparent 80%);
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+    animation: floatGlow2 10s ease-in-out infinite alternate;
+}
+
+@keyframes floatGlow {
+    0% { transform: translate(-30px, -30px) scale(1); }
+    100% { transform: translate(40px, 50px) scale(1.2); }
+}
+
+@keyframes floatGlow2 {
+    0% { transform: translate(20px, 20px) scale(1); }
+    100% { transform: translate(-30px, -40px) scale(1.15); }
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* Экран старта */
+#start-block {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.main-title {
+    font-family: 'Cinzel', serif;
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin-bottom: 35px;
+    background: linear-gradient(135deg, #ffffff 40%, #dc143c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(220, 20, 60, 0.4);
+    text-transform: uppercase;
+}
+
+.start-btn {
+    background: rgba(12, 12, 18, 0.9);
+    color: #ffffff;
+    border: 1px solid rgba(220, 20, 60, 0.5);
+    padding: 18px 42px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(220, 20, 60, 0.25), inset 0 0 10px rgba(220, 20, 60, 0.1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-transform: uppercase;
+}
+
+.start-btn:active {
+    transform: scale(0.94);
+    box-shadow: 0 0 40px rgba(220, 20, 60, 0.6);
+    background: rgba(220, 20, 60, 0.2);
+}
+
+/* Карточки */
+.card {
+    display: none;
+    background: rgba(8, 8, 12, 0.85);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(220, 20, 60, 0.12);
+    position: relative;
+    will-change: transform, opacity;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #dc143c 50%, transparent 100%);
+    opacity: 0.8;
+}
+
+.card.active {
+    display: block;
+    animation: cardAppear 0.5s ease forwards;
+}
+
+.step-tag {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #dc143c;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: inline-block;
+    background: rgba(220, 20, 60, 0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid rgba(220, 20, 60, 0.2);
+    text-shadow: 0 0 8px rgba(220, 20, 60, 0.6);
+}
+
+.media-container {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    position: relative;
+}
+
+.media-container img, .media-container video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.card.active .media-container img,
+.card.active .media-container video {
+    animation: subtleZoom 6s ease-out infinite alternate;
+}
+
+@keyframes subtleZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.04); }
+}
+
+.text-box {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #d1d1db;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 22px;
+    letter-spacing: 0.3px;
+}
+
+.next-btn {
+    background: linear-gradient(135deg, rgba(220, 20, 60, 0.25), rgba(40, 5, 15, 0.6));
+    border: 1px solid rgba(220, 20, 60, 0.5);
+    color: #ffffff;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(220, 20, 60, 0.15);
+    transition: all 0.2s;
+}
+
+.next-btn:active {
+    background: rgba(220, 20, 60, 0.5);
+    transform: scale(0.96);
+    box-shadow: 0 0 25px rgba(220, 20, 60, 0.5);
+}
+
+.final-card {
+    border: 1px solid rgba(220, 20, 60, 0.7);
+    background: linear-gradient(180deg, rgba(25, 5, 12, 0.95), rgba(4, 4, 6, 0.95));
+    box-shadow: 0 0 50px rgba(220, 20, 60, 0.3);
+    text-align: center;
+    padding: 35px 22px;
+}
+
+.final-card h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 18px;
+    text-shadow: 0 0 20px rgba(220, 20, 60, 0.9);
+    letter-spacing: 1px;
+}
+
+.final-card p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #e5e5eb;
+    font-weight: 400;
+}
+
+/* Стили для анимаций перехода */
+.glitch-slice {
+    position: fixed;
+    background: rgba(12, 12, 18, 0.95);
+    border: 1px solid rgba(220, 20, 60, 0.5);
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.5s cubic-bezier(0.1, 0.8, 0.2, 1), opacity 0.5s;
+}
+
+.shard {
+    position: fixed;
+    background: rgba(220, 20, 60, 0.25);
+    border: 1px solid rgba(220, 20, 60, 0.8);
+    box-shadow: 0 0 10px rgba(220, 20, 60, 0.4);
+    pointer-events: none;
+    z-index: 9999;
+    transition: all 0.5s ease-out;
+}
+
+.vortex-out {
+    animation: vortexAnim 0.6s forwards ease-in-out !important;
+}
+@keyframes vortexAnim {
+    0% { transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0); }
+    100% { transform: scale(0.01) rotate(540deg); opacity: 0; filter: blur(15px); }
+}
+
+.ash-particle {
+    position: fixed;
+    background: #dc143c;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #dc143c;
+    pointer-events: none;
+    z-index: 9999;
+    transition: all 0.6s ease-out;
+}
+
+.shockwave-out {
+    animation: shockwaveAnim 0.5s forwards ease-out !important;
+}
+@keyframes shockwaveAnim {
+    0% { transform: scale(1); opacity: 1; filter: brightness(1); }
+    50% { filter: brightness(3); }
+    100% { transform: scale(1.25); opacity: 0; filter: brightness(5) blur(10px); }
+}
+
+.pulse-ring {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 100px; height: 100px;
+    border: 2px solid #dc143c;
+    box-shadow: 0 0 20px #dc143c;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    animation: ringExpand 0.5s ease-out forwards;
+}
+@keyframes ringExpand {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(7); opacity: 0; }
+}
+
+@keyframes cardAppear {
+    from { opacity: 0; transform: translateY(25px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}

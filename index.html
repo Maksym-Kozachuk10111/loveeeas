@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Люблю тибя моя хорошая</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="grain-overlay"></div>
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+
+    <div class="container">
+
+        <!-- НАЧАЛЬНЫЙ ЭКРАН -->
+        <div id="start-block">
+            <h1 class="main-title">Люблю тибя моя хорошая</h1>
+            <button class="start-btn" onclick="startStory()">первый жми жми</button>
+        </div>
+
+        <!-- СЛАЙД 1 -->
+        <div class="card" id="card-1">
+            <div class="media-container">
+                <img src="photo1.jpg" alt="Фото 1">
+            </div>
+            <p class="text-box">любименькая тебе исполняется 18 лет и я хочу, чтобы ты всегда была счастлива и пожелаешь всего самого хорошего и я хочу что бы мы меньше ссорились потому чта ета капецццц ета мы красивые и любимыееееее!!!!</p>
+            <div class="next-btn" onclick="nextCard(1, 2)">ДАЛЬШЕ ➔</div>
+        </div>
+
+        <!-- СЛАЙД 2 -->
+        <div class="card" id="card-2">
+            <div class="media-container">
+                <img src="photo2.jpg" alt="Фото 2">
+            </div>
+            <p class="text-box">хорошая моя самая красивая и любимиая среди всеххх я люблю тебя потому что я счастлив с тобой и мне приятно проводить время с тобой и я хочу что бы этот год и твои 18 лет проходили хорошо и что бы ты не злилась и мы не ругалисссс жми дальшееееее!!!</p>
+            <div class="next-btn" onclick="nextCard(2, 3)">ДАЛЬШЕ ➔</div>
+        </div>
+
+        <!-- СЛАЙД 3 (ВИДЕО) -->
+        <div class="card" id="card-3">
+            <div class="media-container">
+                <video src="video1.mp4" playsinline autoplay loop muted controls></video>
+            </div>
+            <p class="text-box">а ета мы харошие такие я очень скучаю за временем когда мы не ссорились и я хочу что бы мы никогда не ссорились и всегда были счастливы с табоййй моя любоввв больше жизни люблю тебя!</p>
+            <div class="next-btn" onclick="nextCard(3, 4)">ДАЛЬШЕ ➔</div>
+        </div>
+
+        <!-- СЛАЙД 4 -->
+        <div class="card" id="card-4">
+            <div class="media-container">
+                <img src="photo4.jpg" alt="Фото 4">
+            </div>
+            <p class="text-box">а эта мы стабой гулялии в парке хихихихи это было очень мило хорошая моя ^_^ </p>
+            <div class="next-btn" onclick="nextCard(4, 5)">ДАЛЬШЕ ➔</div>
+        </div>
+
+        <!-- СЛАЙД 5 -->
+        <div class="card" id="card-5">
+            <div class="media-container">
+                <img src="photo5.jpg" alt="Фото 5">
+            </div>
+            <p class="text-box">ты мая сладость а я твая сладость и мы всегда будем вместе патамучта мы сладие</p>
+            <div class="next-btn" onclick="nextCard(5, 6)">ГЛАВНОЕ ✦</div>
+        </div>
+
+        <!-- ФИНАЛ -->
+        <div class="card final-card" id="card-6">
+            <h2>С днём рождения, Линочкааааа! ❤️</h2>
+            <p>
+                Моя хорошая, я сижу сейчас и пишу это не очень за долго до твоего дня рождения, и я хочу сказать тебе, что ты для меня очень важна. Ты делаешь мою жизнь лучше и иногда да я злюса на тебя иногда грублю но мне реально очень стыдно, я рад что тебе исполняетса 18 лет и ты уже совсем взрослая и я хочу жить с тобой и хочу быть с тобой больше потому что ты для меня что то большее чем проста девушка, ты моя любимая будущая жинкааа, ну и остальное я скажу в жизни и заобнимаю и зацелую после того как ты это прочитаешь❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️
+            </p>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
